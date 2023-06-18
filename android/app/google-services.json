@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "990287961461",
+    "project_id": "fitness-trinetra",
+    "storage_bucket": "fitness-trinetra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990287961461:android:51865e08143c9799fac73c",
+        "android_client_info": {
+          "package_name": "com.example.trinetraflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990287961461-mongltchjotnlcb37i17o158pho66374.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trinetraflutter",
+            "certificate_hash": "b69deaaa5412500b41c2b23de5258b48697899c7"
+          }
+        },
+        {
+          "client_id": "990287961461-b0au2o8a3n014967ht5bjgprdc16mgba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_YlDukX1iLUWcwr6cG4AVQ2FpySDG7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990287961461-b0au2o8a3n014967ht5bjgprdc16mgba.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

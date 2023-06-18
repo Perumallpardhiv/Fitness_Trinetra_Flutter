@@ -39,10 +39,10 @@ dependencies:
   lottie: ^2.3.2
   animated_text_kit: ^4.2.2
   shared_preferences: ^2.1.0
-  firebase_core: ^2.10.0
-  firebase_auth: ^4.4.2
-  cloud_firestore: ^4.5.2
-  google_sign_in: ^6.1.0
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
+  cloud_firestore: ^4.8.1
+  google_sign_in: ^6.1.4
 
 
 dev_dependencies:
