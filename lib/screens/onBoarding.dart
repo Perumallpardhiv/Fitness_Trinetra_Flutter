@@ -68,7 +68,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   "SKIP",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 13.5,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -92,7 +92,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           "BACK",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 13.5,
                             fontWeight: FontWeight.bold,
                           ),
                         )
@@ -100,7 +100,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           "     ",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 13.5,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -109,7 +109,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   controller: _controller,
                   count: 3,
                   effect: SwapEffect(
-                    dotColor: Colors.deepPurple.shade50,
+                    dotColor: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
                 GestureDetector(
@@ -135,8 +135,8 @@ class _OnBoardingState extends State<OnBoarding> {
                                       (route) => false,
                                     );
                                   },
-                                  fillColor: Colors.deepPurple,
-                                  focusColor: Colors.deepPurple,
+                                  fillColor: Theme.of(context).colorScheme.primary,
+                                  focusColor: Theme.of(context).colorScheme.primary,
                                   shape: const StadiumBorder(),
                                   elevation: 0,
                                   child: const Text(
@@ -171,7 +171,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                     "NEXT",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 13.5,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -189,7 +189,7 @@ class _OnBoardingState extends State<OnBoarding> {
                               "NEXT",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 15,
+                                fontSize: 13.5,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

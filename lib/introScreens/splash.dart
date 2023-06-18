@@ -49,7 +49,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Hero(
           tag: "hero",
@@ -74,11 +74,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                   "TRINETRA",
                   speed: const Duration(milliseconds: 150),
                   textAlign: TextAlign.center,
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                     fontSize: 42,
                     fontWeight: FontWeight.bold,
                     fontFamily: "font1",
-                    color: Colors.deepPurple,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],

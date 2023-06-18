@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trinetraflutter/screens/dailyStreak.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,33 +11,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController txt = TextEditingController();
   var userDetails = FirebaseAuth.instance.currentUser;
+  var index = 1;
+  final navigationKey = GlobalKey<CurvedNavigationBarState>();
+
+  final items = <Widget>[
+    const Icon(Icons.stacked_bar_chart_outlined),
+    const Icon(Icons.fitness_center),
+    const Icon(Icons.sports_gymnastics_outlined),
+  ];
+
+  final screens = [
+    const DailyStreak(),
+    Container(),
+    Container(),
+    // const Gym(),
+    // const Yoga(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(controller: txt),
-            ElevatedButton(
-              onPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection('userInfo')
-                    .doc(userDetails!.uid)
-                    .set(
-                  {
-                    'uid': userDetails!.uid,
-                    'email': userDetails!.email,
-                    'name': txt.text,
-                  },
-                );
-              },
-              child: Text("Submit"),
-            )
-          ],
+      extendBody: true,
+      body: screens[index],
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+        ),
+        child: CurvedNavigationBar(
+          key: navigationKey,
+          color: Theme.of(context).colorScheme.tertiary,
+          buttonBackgroundColor: Theme.of(context).colorScheme.tertiary,
+          items: items,
+          height: 60,
+          backgroundColor: Colors.transparent,
+          index: index,
+          onTap: (index) {
+            setState(() {
+              this.index = index;
+            });
+          },
         ),
       ),
     );

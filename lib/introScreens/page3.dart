@@ -13,12 +13,12 @@ class _Page3State extends State<Page3> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.deepPurple[100],
+      color: Theme.of(context).colorScheme.background,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(25.0),
             child: Text(
               "Consistency is key",
@@ -26,7 +26,7 @@ class _Page3State extends State<Page3> {
               style: TextStyle(
                 fontSize: 30,
                 fontFamily: "font3",
-                color: Colors.deepPurple,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -47,8 +47,8 @@ class _Page3State extends State<Page3> {
               maxLines: 2,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[800],
+                fontSize: 14.5,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),

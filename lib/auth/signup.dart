@@ -19,6 +19,10 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _conformPwdCont = TextEditingController();
   bool pwd = true;
   bool conf_pwd = true;
+  var date = DateTime.now().toString();
+  late var dateParse = DateTime.parse(date);
+  late var formattedData =
+      "${dateParse.day}-${dateParse.month}-${dateParse.year}";
 
   @override
   Widget build(BuildContext context) {
@@ -265,6 +269,7 @@ class _SignUpState extends State<SignUp> {
                                     'uid': userDetails.uid,
                                     'email': userDetails.email,
                                     'name': name.text,
+                                    'joinedAt': formattedData,
                                   },
                                 );
                               } else {

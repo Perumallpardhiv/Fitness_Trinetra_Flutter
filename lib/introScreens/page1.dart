@@ -12,7 +12,7 @@ class _Page1State extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.deepPurple[100],
+      color: Theme.of(context).colorScheme.background,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,8 +24,8 @@ class _Page1State extends State<Page1> {
             ),
           ),
           const SizedBox(height: 30),
-          const Padding(
-            padding: EdgeInsets.all(25.0),
+          Padding(
+            padding: const EdgeInsets.all(25.0),
             child: Hero(
               tag: "hero",
               child: Text(
@@ -35,7 +35,7 @@ class _Page1State extends State<Page1> {
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   fontFamily: "font1",
-                  color: Colors.deepPurple,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -48,8 +48,8 @@ class _Page1State extends State<Page1> {
               maxLines: 2,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[800],
+                fontSize: 14.5,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),

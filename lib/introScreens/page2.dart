@@ -13,7 +13,7 @@ class _Page2State extends State<Page2> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.deepPurple[100],
+      color: Theme.of(context).colorScheme.background,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class _Page2State extends State<Page2> {
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 fontFamily: "font2",
-                color: Colors.deepPurple,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -38,8 +38,8 @@ class _Page2State extends State<Page2> {
               maxLines: 2,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[800],
+                fontSize: 14.5,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
