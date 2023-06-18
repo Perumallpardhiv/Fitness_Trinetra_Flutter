@@ -160,6 +160,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                     var email = shares.getString('email');
                                     var pwd = shares.getString('pwd');
 
+                                    // ignore: use_build_context_synchronously
                                     await authClass.emailSignIn(
                                       context,
                                       email.toString(),

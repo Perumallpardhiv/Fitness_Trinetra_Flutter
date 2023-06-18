@@ -51,9 +51,7 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 35,
                           ),
                         ),
-                        SizedBox(
-                          height: 25,
-                        ),
+                        SizedBox(height: 25),
                         Text(
                           'Welcome to Trinetra',
                           textAlign: TextAlign.center,
@@ -120,9 +118,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 25,
-                          ),
+                          const SizedBox(height: 25),
                           SizedBox(
                             height: 60,
                             width: MediaQuery.of(context).size.width - 60,
@@ -154,10 +150,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Container(
+                          const SizedBox(height: 25),
+                          SizedBox(
                             height: 60,
                             width: MediaQuery.of(context).size.width - 60,
                             child: TextFormField(
@@ -199,10 +193,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Container(
+                          const SizedBox(height: 25),
+                          SizedBox(
                             height: 60,
                             width: MediaQuery.of(context).size.width - 60,
                             child: TextFormField(
@@ -244,9 +236,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          const SizedBox(height: 30),
                           GestureDetector(
                             onTap: () async {
                               if (_pwdCont.text.trim() ==
@@ -265,20 +255,18 @@ class _SignUpState extends State<SignUp> {
                                 prefs.setString('pwd', _pwdCont.text.trim());
 
                                 // add user details for profile page
-                                var user =
-                                    await FirebaseAuth.instance.currentUser;
-                                print(user!.uid);
+                                var userDetails =
+                                    FirebaseAuth.instance.currentUser;
                                 await FirebaseFirestore.instance
-                                    .collection("users")
-                                    .doc(user.uid)
+                                    .collection('userInfo')
+                                    .doc(userDetails!.uid)
                                     .set(
                                   {
-                                    'uid': user.uid,
-                                    'email': _emailCont.text.trim(),
-                                    'username': name.text.trim(),
+                                    'uid': userDetails.uid,
+                                    'email': userDetails.email,
+                                    'name': name.text,
                                   },
                                 );
-                                print(user.uid);
                               } else {
                                 const snackbar = SnackBar(
                                   content: Text(
