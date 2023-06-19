@@ -270,6 +270,8 @@ class _SignUpState extends State<SignUp> {
                                     'email': userDetails.email,
                                     'name': name.text,
                                     'joinedAt': formattedData,
+                                    'age': "18",
+                                    'description': "Exercise for Fitness",
                                   },
                                 );
                               } else {

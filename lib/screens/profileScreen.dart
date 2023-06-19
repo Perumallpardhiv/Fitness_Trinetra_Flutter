@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/auth/auth.dart';
 import 'package:trinetraflutter/auth/signin.dart';
+import 'package:trinetraflutter/screens/editProfile.dart';
 import 'package:trinetraflutter/theme_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -189,7 +190,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EditProfile(),
+                                      ),
+                                    );
+                                  },
                                   child: SizedBox(
                                     height: 60,
                                     width: 60,
@@ -223,30 +231,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     height: 60,
                                     width: 60,
                                     child: Card(
-                                        elevation: 7,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          side: BorderSide(
-                                            width: 1.5,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .tertiary,
-                                          ),
+                                      elevation: 7,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        side: BorderSide(
+                                          width: 1.5,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
                                         ),
-                                        child: Consumer<ThemeProvider>(
-                                          builder: (context, value, child) {
-                                            return Center(
-                                              child: value.themeMode ==
-                                                      ThemeMode.light
-                                                  ? Icon(Icons.light)
-                                                  : Icon(Icons.light_mode),
-                                            );
-                                          },
-                                        )),
+                                      ),
+                                      child: Consumer<ThemeProvider>(
+                                        builder: (context, value, child) {
+                                          return Center(
+                                            child: value.themeMode ==
+                                                    ThemeMode.light
+                                                ? Icon(Icons.light)
+                                                : Icon(Icons.light_mode),
+                                          );
+                                        },
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
