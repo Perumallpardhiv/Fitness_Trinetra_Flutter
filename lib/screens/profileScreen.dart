@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/auth/auth.dart';
 import 'package:trinetraflutter/auth/signin.dart';
+import 'package:trinetraflutter/theme_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
@@ -19,18 +21,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            ClipPath(
-              clipper: Clip1Clipper(),
-              child: Container(
-                height: 320,
-                color: Theme.of(context).colorScheme.tertiary,
+            Material(
+              elevation: 10,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
+              ),
+              child: ClipPath(
+                clipper: Clip1Clipper(),
+                child: Container(
+                  height: 320,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
               ),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -153,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () async {},
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 60,
                                     width: 60,
                                     child: Card(
@@ -179,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () async {},
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 60,
                                     width: 60,
                                     child: Card(
@@ -203,28 +214,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
+                                  onTap: () {
+                                    themeProvider.themeMode == ThemeMode.light
+                                        ? themeProvider.toggleTheme(true)
+                                        : themeProvider.toggleTheme(false);
+                                  },
+                                  child: SizedBox(
                                     height: 60,
                                     width: 60,
                                     child: Card(
-                                      elevation: 7,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        side: BorderSide(
-                                          width: 1.5,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .tertiary,
+                                        elevation: 7,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          side: BorderSide(
+                                            width: 1.5,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary,
+                                          ),
                                         ),
-                                      ),
-                                      child: const Center(
-                                        child: Icon(Icons.light),
-                                      ),
-                                    ),
+                                        child: Consumer<ThemeProvider>(
+                                          builder: (context, value, child) {
+                                            return Center(
+                                              child: value.themeMode ==
+                                                      ThemeMode.light
+                                                  ? Icon(Icons.light)
+                                                  : Icon(Icons.light_mode),
+                                            );
+                                          },
+                                        )),
                                   ),
                                 ),
                               ],
@@ -285,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         await SharedPreferences.getInstance();
                                     prefs.setBool('isLogged', false);
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 60,
                                     child: Card(
                                       elevation: 7,
