@@ -48,6 +48,10 @@ dependencies:
   fl_chart: ^0.63.0
   share_plus: ^7.0.2
   provider: ^6.0.5
+  carousel_slider: ^4.2.1
+  giff_dialog: ^1.0.1
+  camera: ^0.10.5+2
+  google_ml_kit: ^0.14.0
 
 
 dev_dependencies:

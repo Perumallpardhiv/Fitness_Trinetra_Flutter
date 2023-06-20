@@ -51,7 +51,7 @@ class _DailyStreakState extends State<DailyStreak> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: ListTile(
-                          title: Text("Hi, ${name}"),
+                          title: Text("Hi, $name"),
                           subtitle: const Text("Let's check your activity"),
                           trailing: Container(
                             decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +7,8 @@ import 'package:trinetraflutter/introScreens/splash.dart';
 import 'package:trinetraflutter/theme_data.dart';
 import 'package:trinetraflutter/theme_provider.dart';
 
+List<CameraDescription>? cameras;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
@@ -13,6 +16,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await Firebase.initializeApp();
+  cameras = await availableCameras();
   runApp(
     MultiProvider(
       providers: [

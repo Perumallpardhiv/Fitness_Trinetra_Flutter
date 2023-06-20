@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trinetraflutter/screens/dailyStreak.dart';
+import 'package:trinetraflutter/screens/gym.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,9 +24,8 @@ class _HomePageState extends State<HomePage> {
 
   final screens = [
     const DailyStreak(),
+    const Gym(),
     Container(),
-    Container(),
-    // const Gym(),
     // const Yoga(),
   ];
 
