@@ -8,6 +8,8 @@ import 'package:trinetraflutter/abs/elbow_plank.dart';
 import 'package:trinetraflutter/abs/flutter_kicks.dart';
 import 'package:trinetraflutter/abs/leg_rise.dart';
 import 'package:trinetraflutter/abs/sit_ups.dart';
+import 'package:trinetraflutter/chest/dumbells.dart';
+import 'package:trinetraflutter/chest/plankRotations.dart';
 import 'package:trinetraflutter/glutes/donkey_kick.dart';
 import 'package:trinetraflutter/glutes/sideLegrRises.dart';
 import 'package:trinetraflutter/glutes/squats.dart';
@@ -612,6 +614,110 @@ class _GymState extends State<Gym> {
                       padding: const EdgeInsets.only(top: 15, left: 15),
                       child: Text(
                         "Chest",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 22.5,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "font6",
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: chest_count.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  index == 0
+                                      ? showDialog(
+                                          context: context,
+                                          builder: (_) => AssetGiffDialog(
+                                            title: const Text(
+                                              'Plank Rotation',
+                                              style: TextStyle(
+                                                fontSize: 22.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            entryAnimation:
+                                                EntryAnimation.bottomRight,
+                                            onOkButtonPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PlankRotations(),
+                                                ),
+                                              );
+                                            },
+                                            image: Image.asset(
+                                              'assets/images/PlankRotation.gif',
+                                            ),
+                                          ),
+                                        )
+                                      : Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const dumbells(),
+                                          ),
+                                        );
+                                },
+                                child: Consumer<ThemeProvider>(
+                                  builder: (context, value, child) {
+                                    return Material(
+                                      elevation: 3,
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: value.themeMode ==
+                                                    ThemeMode.light
+                                                ? [
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade50,
+                                                  ]
+                                                : [
+                                                    Colors.grey.shade600,
+                                                    // Colors.grey.shade600,
+                                                    Colors.grey.shade700,
+                                                  ],
+                                            begin: Alignment.center,
+                                            end: Alignment.topRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Image.asset(
+                                          chest_count[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, left: 15),
+                      child: Text(
+                        "Back",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 22.5,
