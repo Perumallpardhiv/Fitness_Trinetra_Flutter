@@ -8,6 +8,7 @@ import 'package:trinetraflutter/abs/elbow_plank.dart';
 import 'package:trinetraflutter/abs/flutter_kicks.dart';
 import 'package:trinetraflutter/abs/leg_rise.dart';
 import 'package:trinetraflutter/abs/sit_ups.dart';
+import 'package:trinetraflutter/back/superman.dart';
 import 'package:trinetraflutter/chest/dumbells.dart';
 import 'package:trinetraflutter/chest/plankRotations.dart';
 import 'package:trinetraflutter/glutes/donkey_kick.dart';
@@ -596,9 +597,16 @@ class _GymState extends State<Gym> {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        child: Image.asset(
-                                          glutes_count[index],
-                                          fit: BoxFit.cover,
+                                        child: Padding(
+                                          padding: index == 0
+                                              ? const EdgeInsets.symmetric(
+                                                  vertical: 10,
+                                                )
+                                              : const EdgeInsets.all(0),
+                                          child: Image.asset(
+                                            glutes_count[index],
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -670,7 +678,8 @@ class _GymState extends State<Gym> {
                                       : Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => const dumbells(),
+                                            builder: (context) =>
+                                                const dumbells(),
                                           ),
                                         );
                                 },
@@ -700,9 +709,17 @@ class _GymState extends State<Gym> {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        child: Image.asset(
-                                          chest_count[index],
-                                          fit: BoxFit.cover,
+                                        child: Padding(
+                                          padding: index == 1
+                                              ? const EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical: 10,
+                                                )
+                                              : const EdgeInsets.all(0),
+                                          child: Image.asset(
+                                            chest_count[index],
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -727,6 +744,81 @@ class _GymState extends State<Gym> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: back_count.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  index == 0
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Superman(),
+                                          ),
+                                        )
+                                      : null;
+                                },
+                                child: Consumer<ThemeProvider>(
+                                  builder: (context, value, child) {
+                                    return Material(
+                                      elevation: 3,
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: value.themeMode ==
+                                                    ThemeMode.light
+                                                ? [
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade50,
+                                                  ]
+                                                : [
+                                                    Colors.grey.shade600,
+                                                    // Colors.grey.shade600,
+                                                    Colors.grey.shade700,
+                                                  ],
+                                            begin: Alignment.center,
+                                            end: Alignment.topRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Padding(
+                                          padding: index == 1
+                                              ? const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 5,
+                                                )
+                                              : const EdgeInsets.all(0),
+                                          child: Image.asset(
+                                            back_count[index],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 100),
                   ],
                 ),
               ),
