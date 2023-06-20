@@ -2,12 +2,14 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:giff_dialog/giff_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:trinetraflutter/abs/bicycle_crunches.dart';
 import 'package:trinetraflutter/abs/elbow_plank.dart';
 import 'package:trinetraflutter/abs/flutter_kicks.dart';
 import 'package:trinetraflutter/abs/leg_rise.dart';
 import 'package:trinetraflutter/abs/sit_ups.dart';
 import 'package:trinetraflutter/screens/profileScreen.dart';
+import 'package:trinetraflutter/theme_provider.dart';
 
 class Gym extends StatefulWidget {
   const Gym({super.key});
@@ -159,9 +161,9 @@ class _GymState extends State<Gym> {
           ),
           Align(
             child: Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: const EdgeInsets.only(top: 100),
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -171,31 +173,42 @@ class _GymState extends State<Gym> {
                       child: CarouselSlider.builder(
                         itemBuilder:
                             (BuildContext context, int index, int realIndex) {
-                          return Material(
-                            borderRadius: BorderRadius.circular(50),
-                            elevation: 5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Theme.of(context).colorScheme.background,
-                                    Theme.of(context).colorScheme.tertiary
-                                  ],
-                                  begin: Alignment.center,
-                                  end: Alignment.topRight,
-                                ),
+                          return Consumer<ThemeProvider>(
+                            builder: (context, value, child) {
+                              return Material(
                                 borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: padd[index],
+                                elevation: 5,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: value.themeMode == ThemeMode.light
+                                          ? [
+                                              // Colors.deepPurple.shade100,
+                                              Colors.deepPurple.shade200,
+                                              Colors.deepPurple.shade200,
+                                            ]
+                                          : [
+                                              Colors.grey.shade700,
+                                              Colors.grey.shade700,
+                                              // Colors.grey.shade800,
+                                            ],
+                                      begin: Alignment.center,
+                                      end: Alignment.topRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: padd[index],
+                                    ),
+                                    child: Image.asset(
+                                      carousels[index],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                                child: Image.asset(
-                                  carousels[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
+                              );
+                            },
                           );
                         },
                         itemCount: carousels.length,
@@ -203,7 +216,7 @@ class _GymState extends State<Gym> {
                           height: 225,
                           viewportFraction: 1,
                           autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 2),
+                          autoPlayInterval: const Duration(seconds: 2),
                           enlargeCenterPage: true,
                           enlargeStrategy: CenterPageEnlargeStrategy.height,
                         ),
@@ -222,18 +235,18 @@ class _GymState extends State<Gym> {
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       height: 150,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: ListView.builder(
                           shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: abs_count.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
                                 vertical: 5,
                               ),
@@ -257,7 +270,7 @@ class _GymState extends State<Gym> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      SitUps(),
+                                                      const SitUps(),
                                                 ),
                                               );
                                             },
@@ -271,7 +284,7 @@ class _GymState extends State<Gym> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Bicycle_crunches(),
+                                                    const Bicycle_crunches(),
                                               ),
                                             )
                                           : index == 2
@@ -279,7 +292,7 @@ class _GymState extends State<Gym> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        LegRise(),
+                                                        const LegRise(),
                                                   ),
                                                 )
                                               : index == 3
@@ -303,7 +316,7 @@ class _GymState extends State<Gym> {
                                                             context,
                                                             MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  FlutterKicks(),
+                                                                  const FlutterKicks(),
                                                             ),
                                                           );
                                                         },
@@ -332,7 +345,7 @@ class _GymState extends State<Gym> {
                                                             context,
                                                             MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  ElbowPlank(),
+                                                                  const ElbowPlank(),
                                                             ),
                                                           );
                                                         },
@@ -342,30 +355,55 @@ class _GymState extends State<Gym> {
                                                       ),
                                                     );
                                 },
-                                child: Material(
-                                  elevation: 3,
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.deepPurple.shade50,
-                                          Theme.of(context).colorScheme.background,
-                                        ],
-                                        begin: Alignment.center,
-                                        end: Alignment.topRight,
-                                      ),
+                                child: Consumer<ThemeProvider>(
+                                  builder: (context, value, child) {
+                                    return Material(
+                                      elevation: 3,
                                       borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Image.asset(
-                                      abs_count[index],
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: value.themeMode ==
+                                                    ThemeMode.light
+                                                ? [
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade100,
+                                                    Colors.deepPurple.shade50,
+                                                  ]
+                                                : [
+                                                    Colors.grey.shade600,
+                                                    Colors.grey.shade700,
+                                                  ],
+                                            begin: Alignment.center,
+                                            end: Alignment.topRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Image.asset(
+                                          abs_count[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             );
                           },
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, left: 15),
+                      child: Text(
+                        "Quads",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 22.5,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "font6",
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
