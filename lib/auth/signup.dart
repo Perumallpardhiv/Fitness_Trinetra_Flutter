@@ -258,20 +258,22 @@ class _SignUpState extends State<SignUp> {
                                     'email', _emailCont.text.trim());
                                 prefs.setString('pwd', _pwdCont.text.trim());
 
-                                // add user details for profile page
                                 var userDetails =
-                                    FirebaseAuth.instance.currentUser;
+                                    await FirebaseAuth.instance.currentUser;
+                                print(userDetails);
+
                                 await FirebaseFirestore.instance
                                     .collection('userInfo')
-                                    .doc(userDetails!.uid)
+                                    .doc(userDetails?.uid)
                                     .set(
                                   {
-                                    'uid': userDetails.uid,
-                                    'email': userDetails.email,
+                                    'uid': userDetails?.uid,
+                                    'email': userDetails?.email,
                                     'name': name.text,
                                     'joinedAt': formattedData,
                                     'age': "18",
                                     'description': "Exercise for Fitness",
+                                    "routine": [10, 12, 14, 16, 18, 20, 22],
                                   },
                                 );
                               } else {

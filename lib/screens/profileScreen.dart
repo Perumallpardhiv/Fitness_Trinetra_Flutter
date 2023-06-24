@@ -54,6 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return const Text("Loading ...");
                   }
                   var details = snapshot.data;
+                  print(details);
+                  print(details?['routine']);
                   return Column(
                     children: [
                       Padding(

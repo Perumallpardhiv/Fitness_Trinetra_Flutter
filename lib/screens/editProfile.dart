@@ -195,6 +195,7 @@ class _EditProfileState extends State<EditProfile> {
                             MaterialButton(
                               onPressed: () async {
                                 try {
+                                  Navigator.pop(context);
                                   await FirebaseFirestore.instance
                                       .collection('userInfo')
                                       .doc(userDetails.uid)
@@ -205,7 +206,6 @@ class _EditProfileState extends State<EditProfile> {
                                       'age': age,
                                     },
                                   );
-                                  Navigator.pop(context);
                                 } catch (e) {
                                   print(e);
                                 }

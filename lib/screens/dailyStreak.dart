@@ -15,7 +15,8 @@ class DailyStreak extends StatefulWidget {
 class _DailyStreakState extends State<DailyStreak> {
   final userDetails = FirebaseAuth.instance.currentUser;
 
-  List cal = [10.0, 20.0, 3.0, 8.5, 10.0, 56.0, 92.0];
+  List<dynamic> cal = [];
+  List<double> cal2 = [];
 
   Map<String, double> dataMap = {
     "Abs": 32,
@@ -46,6 +47,12 @@ class _DailyStreakState extends State<DailyStreak> {
                   }
                   var details = snapshot.data;
                   var name = details!['name'] ?? "John";
+                  cal = details['routine'];
+                  cal2.clear();
+                  for (var element in cal) {
+                    double ele = element.toDouble();
+                    cal2.add(ele);
+                  }
                   return Column(
                     children: [
                       Padding(
@@ -83,7 +90,7 @@ class _DailyStreakState extends State<DailyStreak> {
                         ),
                         child: SizedBox(
                           height: 220,
-                          child: BarGraph(weeklySummary: cal),
+                          child: BarGraph(weeklySummary: cal2),
                         ),
                       ),
                       const Padding(
