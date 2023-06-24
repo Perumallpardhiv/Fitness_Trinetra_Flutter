@@ -1,4 +1,4 @@
-# trinetraflutter
+# Trinetraflutter
 
 A new Flutter project.
 
