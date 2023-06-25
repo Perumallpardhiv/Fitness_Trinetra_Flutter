@@ -7,7 +7,7 @@ import 'package:trinetraflutter/values.dart';
 
 late Timer timetime;
 
-class PosePainter_elbowPlank extends CustomPainter {
+class PosePainter_pushUp extends CustomPainter {
   final List<Pose> poses;
   final Size absoluteImageSize;
   final InputImageRotation rotation;
@@ -20,7 +20,7 @@ class PosePainter_elbowPlank extends CustomPainter {
   final PoseLandmarkType rightpos2;
   final PoseLandmarkType rightpos3;
 
-  PosePainter_elbowPlank(
+  PosePainter_pushUp(
     this.poses,
     this.absoluteImageSize,
     this.rotation,
@@ -48,54 +48,34 @@ class PosePainter_elbowPlank extends CustomPainter {
 
     for (var pose in poses) {
       final landmark = pose.landmarks[leftpos1]!; //shoulder
-      final landmark2 = pose.landmarks[leftpos2]!; //elbow
-      final landmark5 = pose.landmarks[leftpos3]!; //wrist
+      final landmark2 = pose.landmarks[leftpos2]!; //hip
+      final landmark5 = pose.landmarks[leftpos3]!; //ankle
 
       final landmark1 = pose.landmarks[rightpos1]!;
       final landmark3 = pose.landmarks[rightpos2]!;
       final landmark4 = pose.landmarks[rightpos3]!;
 
-      angle = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
-              atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
+      angle = (atan2(landmark5.y - landmark.y, landmark5.x - landmark.x)) *
           180 ~/
           PI;
 
-      angle1 = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
-              atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
+      angler = (atan2(landmark4.y - landmark1.y, landmark4.x - landmark1.x)) *
           180 ~/
           PI;
 
       if (angle < 0) {
-        angle = angle + 360;
+        angle = angle * -1;
       }
 
       if (angler < 0) {
-        angler = angler + 360;
+        angler = angler * -1;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if (stage != "down" &&
-          angle > 265 &&
-          angle < 285 &&
-          angle1 > 265 &&
-          angle1 < 285) {
+      print("Angler: $angler");
+      if ((stage != "down" && angle > 20 && angle < 60) ||
+          (stage != "down" && angler > 20 && angler < 60)) {
         stage = "down";
         color = Colors.green;
-        timetime = Timer.periodic(Duration(seconds: 1), (time) {
-          counter++;
-        });
       }
       if (stage == "down") {
         color = Colors.green;
@@ -104,10 +84,10 @@ class PosePainter_elbowPlank extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if (stage == "down" &&
-          ((angle < 265 || angle > 285) || (angle1 < 265 && angle1 > 285))) {
-        timetime.cancel();
-        stage == "up";
+      if ((stage == "down" && angle >= 0 && angle < 10) ||
+          (stage == "down" && angler >= 0 && angler < 10)) {
+        counter++;
+        stage = "up";
       }
 
       canvas.drawCircle(
@@ -186,7 +166,7 @@ class PosePainter_elbowPlank extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant PosePainter_elbowPlank oldDelegate) {
+  bool shouldRepaint(covariant PosePainter_pushUp oldDelegate) {
     return oldDelegate.absoluteImageSize != absoluteImageSize ||
         oldDelegate.poses != poses;
   }

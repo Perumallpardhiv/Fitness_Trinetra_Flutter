@@ -70,7 +70,7 @@ class _SitUpsState extends State<SitUps> {
           inputImage.inputImageData!.imageRotation,
           110,
           125,
-          75,
+          80,
           95,
           leftpos1,
           leftpos2,

@@ -61,68 +61,26 @@ class PosePainter_bicycleCrunches extends CustomPainter {
           180 ~/
           PI;
 
-      angle1 = (atan2(right3.y - right2.y, right3.x - right2.x) -
+      angler = (atan2(right3.y - right2.y, right3.x - right2.x) -
               atan2(right1.y - right2.y, right1.x - right2.x)) *
           180 ~/
           PI;
-      // print("Angle1: $angle1");
-
-      // angle = (atan2(left3.y - left1.y, left3.x - left1.x)) *
-      //     180 ~/
-      //     PI; //left leg straight
-
-      // angle1 = (atan2(right3.y - right2.y, right3.x - right2.x) -
-      //         atan2(right1.y - right2.y, right1.x - right2.x)) *
-      //     180 ~/
-      //     PI; // right leg curve
-
-      // angler = (atan2(right3.y - right1.y, right3.x - right1.x)) *
-      //     180 ~/
-      //     PI; //right leg straight
-
-      // angle1r = (atan2(left3.y - left2.y, left3.x - left2.x) -
-      //         atan2(left1.y - left2.y, left1.x - left2.x)) *
-      //     180 ~/
-      //     PI; // left leg curve
 
       if (angle < 0) {
-        angle = angle + 360;
+        angle = angle * -1;
       }
 
       if (angler < 0) {
-        angler = angler + 360;
+        angler = angler * -1;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
+      print("Angle: $angle");
+      print("Angler: $angler");
 
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
-      // print("Angle: $angle");
-      print("Angle1: $angle1");
-      // print("Angler: $angler");
-      // print("Angle1r: $angle1r");
-
-      if ((angle > 290 && angle < 330 && stage != "down" && angle1 > 180 && angle1 < 210) ||
-          (angle1 > 290 && angle1 < 330 && stage != "down" && angle > 180 && angle < 210)) {
+      if (angle > 40 && angle < 100 && stage != "down" && angler > 130 && angler < 190) 
+      {
         stage = "down";
         color = Colors.green;
       }
-
-      // if (((angle > 25 && angle < 55 && stage != "down") &&
-      //         (angle1 > 80 && angle1 < 135 && stage != "down")) ||
-      //     ((angler > 25 && angler < 55 && stage != "down") &&
-      //         (angle1r > 80 && angle1r < 135 && stage != "down"))) {
-      //   stage = "down";
-      //   color = Colors.green;
-      // }
       if (stage == "down") {
         color = Colors.green;
         align = true;
@@ -130,8 +88,7 @@ class PosePainter_bicycleCrunches extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 290 && angle < 330 && stage == "down" && angle1 > 180 && angle1 < 210) ||
-          (angle1 > 290 && angle1 < 330 && stage == "down" && angle > 180 && angle < 210)) {
+      if (angler > 40 && angler < 100 && stage == "down" && angle > 130 && angle < 190) {
         counter++;
         stage = "up";
       }

@@ -61,7 +61,7 @@ class PosePainter_legRise extends CustomPainter {
           180 ~/
           PI;
 
-       angle1 = (atan2(right1.y - right0.y, right1.x - right0.x) -
+       angler = (atan2(right1.y - right0.y, right1.x - right0.x) -
               atan2(right2.y - right1.y, right2.x - right1.x)) *
           180 ~/
           PI;
@@ -74,19 +74,11 @@ class PosePainter_legRise extends CustomPainter {
         angler = angler + 360;
       }
 
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-
       print("Angle: $angle");
-      print("Angle1: $angle1");
+      print("Angler: $angler");
 
-      if ((angle > 55 && angle < 70 && stage != "down") &&
-          (angle1 > 55 && angle1 < 70 && stage != "down")) {
+      if ((angle > 55 && angle < 80 && stage != "down") &&
+          (angler > 55 && angler < 80 && stage != "down")) {
         stage = "down";
         color = Colors.green;
       }
@@ -98,7 +90,7 @@ class PosePainter_legRise extends CustomPainter {
         align = false;
       }
       if ((angle > 340 && angle < 360 && stage == "down") &&
-          (angle1 > 340 && angle1 < 360 && stage == "down")) {
+          (angler > 340 && angler < 360 && stage == "down")) {
         counter++;
         stage = "up";
       }

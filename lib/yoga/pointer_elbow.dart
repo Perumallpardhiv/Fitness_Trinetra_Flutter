@@ -1,17 +1,18 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:trinetraflutter/translator.dart';
 import 'package:trinetraflutter/values.dart';
 
-class PosePainter extends CustomPainter {
+late Timer timetime;
+
+class PosePainter_elbowPlank extends CustomPainter {
   final List<Pose> poses;
   final Size absoluteImageSize;
   final InputImageRotation rotation;
   final int minangle;
   final int minangle2;
-  final int maxangle;
-  final int maxangle2;
   final PoseLandmarkType leftpos1;
   final PoseLandmarkType leftpos2;
   final PoseLandmarkType leftpos3;
@@ -19,14 +20,12 @@ class PosePainter extends CustomPainter {
   final PoseLandmarkType rightpos2;
   final PoseLandmarkType rightpos3;
 
-  PosePainter(
+  PosePainter_elbowPlank(
     this.poses,
     this.absoluteImageSize,
     this.rotation,
     this.minangle,
     this.minangle2,
-    this.maxangle,
-    this.maxangle2,
     this.leftpos1,
     this.leftpos2,
     this.leftpos3,
@@ -49,27 +48,19 @@ class PosePainter extends CustomPainter {
 
     for (var pose in poses) {
       final landmark = pose.landmarks[leftpos1]!; //shoulder
-      final landmark2 = pose.landmarks[leftpos2]!; //hip
-      final landmark5 = pose.landmarks[leftpos3]!; //knee
+      final landmark2 = pose.landmarks[leftpos2]!; //elbow
+      final landmark5 = pose.landmarks[leftpos3]!; //wrist
 
-      final landmark1 = pose.landmarks[rightpos1]!; //shoulder
-      final landmark3 = pose.landmarks[rightpos2]!; //hip
-      final landmark4 = pose.landmarks[rightpos3]!; //knee
+      final landmark1 = pose.landmarks[rightpos1]!;
+      final landmark3 = pose.landmarks[rightpos2]!;
+      final landmark4 = pose.landmarks[rightpos3]!;
 
       angle = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
               atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
-              atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
-          180 ~/
-          PI;
 
-      angler = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
-              atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
-          180 ~/
-          PI;
-      angle1r = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
+      angle1 = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
               atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
           180 ~/
           PI;
@@ -77,21 +68,34 @@ class PosePainter extends CustomPainter {
       if (angle < 0) {
         angle = angle + 360;
       }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
+
       if (angler < 0) {
         angler = angler + 360;
+      }
+      // if (angle > 180) {
+      //   angle = 360 - angle;
+      // }
+      if (angle1 < 0) {
+        angle1 = angle1 + 360;
       }
       if (angle1r < 0) {
         angle1r = angle1r + 360;
       }
+      // if (angle1 > 180) {
+      //   angle1 = 360 - angle1;
+      // }
       print("Angle: $angle");
-      print("Angler: $angler");
-      if ((angle > maxangle && angle < maxangle2 && stage != "down") ||
-          (angler > maxangle && angler < maxangle2 && stage != "down")) {
+      print("Angle1: $angle1");
+      if (stage != "down" &&
+          angle > 265 &&
+          angle < 285 &&
+          angle1 > 265 &&
+          angle1 < 285) {
         stage = "down";
         color = Colors.green;
+        timetime = Timer.periodic(Duration(seconds: 1), (time) {
+          counter++;
+        });
       }
       if (stage == "down") {
         color = Colors.green;
@@ -100,9 +104,9 @@ class PosePainter extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > minangle && angle < minangle2 && stage == "down") ||
-          (angler > minangle && angler < minangle2 && stage == "down")) {
-        counter++;
+      if (stage == "down" &&
+          ((angle < 265 || angle > 285) || (angle1 < 265 && angle1 > 285))) {
+        timetime.cancel();
         stage = "up";
       }
 
@@ -182,7 +186,7 @@ class PosePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant PosePainter oldDelegate) {
+  bool shouldRepaint(covariant PosePainter_elbowPlank oldDelegate) {
     return oldDelegate.absoluteImageSize != absoluteImageSize ||
         oldDelegate.poses != poses;
   }

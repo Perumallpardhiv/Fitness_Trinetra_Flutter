@@ -59,7 +59,7 @@ class PosePainter_flutterKicks extends CustomPainter {
       angle = (atan2(landmark.y - landmark5.y, landmark.x - landmark5.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark1.y - landmark4.y, landmark1.x - landmark4.x)) *
+      angler = (atan2(landmark1.y - landmark4.y, landmark1.x - landmark4.x)) *
           180 ~/
           PI;
 
@@ -70,15 +70,9 @@ class PosePainter_flutterKicks extends CustomPainter {
       if (angler < 0) {
         angler = angler + 360;
       }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if (angle > angle1 + 20 && stage != "down") {
+      print("Angler: $angler");
+      if (angler>10 && angle > angler + 20 && stage != "down") {
         stage = "down";
         color = Colors.green;
       }
@@ -89,7 +83,7 @@ class PosePainter_flutterKicks extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if (angle + 20 < angle1 && stage == "down") {
+      if (angle>10 && angle + 20 < angler && stage == "down") {
         counter++;
         stage = "up";
       }

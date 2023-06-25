@@ -23,7 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -166,7 +165,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 GestureDetector(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    final prefs =
+                                        await SharedPreferences.getInstance();
+                                    print(prefs.getInt('abs'));
+                                  },
                                   child: SizedBox(
                                     height: 60,
                                     width: 60,

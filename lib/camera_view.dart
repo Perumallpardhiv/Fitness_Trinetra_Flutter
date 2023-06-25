@@ -56,11 +56,21 @@ class _CameraViewState extends State<CameraView> {
           children: [
             _liveFeedBody(),
             Container(
-              color: align ? Colors.green : Colors.red,
-              height: 50,
+              alignment: Alignment.center,
+              color: align ? Colors.green : Colors.deepPurple.shade300,
+              height: 70,
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: Text(counter.toString()),
+                child: Text(
+                  counter.toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: "font2",
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
@@ -71,14 +81,14 @@ class _CameraViewState extends State<CameraView> {
 
   Widget _liveFeedBody() {
     if (_controller?.value.isInitialized == false) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(
           color: Colors.red,
         ),
       );
     }
     return Container(
-      height: MediaQuery.of(context).size.height - 50,
+      height: MediaQuery.of(context).size.height - 70,
       color: Colors.black,
       child: Stack(
         fit: StackFit.expand,
@@ -106,7 +116,7 @@ class _CameraViewState extends State<CameraView> {
         _controller!.startImageStream(_processCameraImage).catchError((e) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         });
         stream != stream;

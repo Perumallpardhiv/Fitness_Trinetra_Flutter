@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trinetraflutter/abs/pointer_legrise.dart';
+import 'package:trinetraflutter/abs/pointers_pushups.dart';
+import 'package:trinetraflutter/camera_view.dart';
 import 'package:trinetraflutter/values.dart';
 
-import '../camera_view.dart';
-
-class LegRise extends StatefulWidget {
-  const LegRise({super.key});
+class PushUp extends StatefulWidget {
+  const PushUp({super.key});
 
   @override
-  State<LegRise> createState() => _LegRiseState();
+  State<PushUp> createState() => _PushUpState();
 }
 
-class _LegRiseState extends State<LegRise> {
+class _PushUpState extends State<PushUp> {
   PoseDetector poseDetector = GoogleMlKit.vision.poseDetector();
   bool isBusy = false;
   CustomPaint? customPaint;
@@ -22,7 +21,7 @@ class _LegRiseState extends State<LegRise> {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
     var calories = prefs.getInt('abs') ?? 0;
-    var cal = calories + (counter * 0.3).toInt();
+    var cal = calories + (counter * 0.15).toInt();
     prefs.setInt('abs', cal);
     print("Counter: $counter \n Calories: $cal");
   }
@@ -43,10 +42,11 @@ class _LegRiseState extends State<LegRise> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-        customPaint: customPaint,
-        onImage: (inputImage) {
-          processImage(inputImage);
-        });
+      customPaint: customPaint,
+      onImage: (inputImage) {
+        processImage(inputImage);
+      },
+    );
   }
 
   Future<void> processImage(InputImage inputImage) async {
@@ -64,14 +64,12 @@ class _LegRiseState extends State<LegRise> {
     // final faces = await faceDetector.processImage(inputImage);
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
-      final painter = PosePainter_legRise(
+      final painter = PosePainter_pushUp(
         poses,
         inputImage.inputImageData!.size,
         inputImage.inputImageData!.imageRotation,
         85,
         105,
-        165,
-        180,
         leftpos1,
         leftpos2,
         leftpos3,
