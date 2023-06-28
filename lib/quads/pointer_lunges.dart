@@ -56,39 +56,41 @@ class PosePointer_Lunges extends CustomPainter {
       final landmark5 = pose.landmarks[rightpos2]!; //knee
       final landmark6 = pose.landmarks[rightpos3]!; //ankle
 
-      angle = (atan2(landmark1.y - landmark2.y, landmark1.x - landmark2.x) -
-              atan2(landmark3.y - landmark2.y, landmark3.x - landmark2.x)) *
-          180 ~/
-          PI;
+      // angle = (atan2(landmark1.y - landmark2.y, landmark1.x - landmark2.x) -
+      //         atan2(landmark3.y - landmark2.y, landmark3.x - landmark2.x)) *
+      //     180 ~/
+      //     PI;
 
-      // angle1 = (atan2(landmark4.y - landmark5.y, landmark4.x - landmark5.x) -
+      // angler = (atan2(landmark4.y - landmark5.y, landmark4.x - landmark5.x) -
       //         atan2(landmark6.y - landmark5.y, landmark6.x - landmark5.x)) *
       //     180 ~/
       //     PI;
 
+      angle = atan2(landmark3.y - landmark2.y, landmark3.x - landmark2.x) *
+          180 ~/
+          PI;
+
+      angler = atan2(landmark6.y - landmark5.y, landmark6.x - landmark5.x) *
+          180 ~/
+          PI;
+
       if (angle < 0) {
         angle = angle + 360;
       }
-
       if (angler < 0) {
         angler = angler + 360;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
+      if (angle < 20) {
+        angle = 180 - angle;
       }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
+      if (angler < 20) {
+        angler = 180 - angler;
       }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
       print("Angle: $angle");
-      print("Angle1: $angle1");
+      print("Angler: $angler");
 
-      if (((angle > 87 && angle < 92) || (angle1 > 87 && angle1 < 92)) &&
+      if ((angle > 87 && angle < 105) &&
+          (angler > 165 && angler < 190) &&
           stage != "down") {
         stage = "down";
         color = Colors.green;
@@ -100,7 +102,8 @@ class PosePointer_Lunges extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if (((angle > 87 && angle < 92) || (angle1 > 87 && angle1 < 92)) &&
+      if ((angler > 87 && angler < 105) &&
+          (angle > 165 && angle < 185) &&
           stage == "down") {
         counter++;
         stage = "up";
