@@ -60,7 +60,8 @@ class PosePointer_HighKnees extends CustomPainter {
               (atan2(landmark3.y - landmark2.y, landmark3.x - landmark2.x))) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark4.y - landmark5.y, landmark4.x - landmark5.x) -
+          
+      angler = (atan2(landmark4.y - landmark5.y, landmark4.x - landmark5.x) -
               (atan2(landmark6.y - landmark5.y, landmark6.x - landmark5.x))) *
           180 ~/
           PI;
@@ -68,26 +69,16 @@ class PosePointer_HighKnees extends CustomPainter {
       if (angle < 0) {
         angle = angle + 360;
       }
-
       if (angler < 0) {
         angler = angler + 360;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
       print("Angle: $angle");
-      // print("Angle1: $angle1");
-      if ((angle > 151 && angle < 166 && stage != "down") ||
-          (angle1 > 151 && angle1 < 166 && stage != "down")) {
+      print("Angler: $angler");
+      if ((angle > 85 &&
+          angle < 110 &&
+          angler > 165 &&
+          angler < 185 &&
+          stage != "down")) {
         stage = "down";
         color = Colors.green;
       }
@@ -98,8 +89,11 @@ class PosePointer_HighKnees extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 151 && angle < 166 && stage == "down") ||
-          (angle1 > 151 && angle1 < 166 && stage == "down")) {
+      if ((angle > 165 &&
+          angle < 185 &&
+          angler > 80 &&
+          angler < 110 &&
+          stage == "down")) {
         counter++;
         stage = "up";
       }

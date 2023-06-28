@@ -5,7 +5,6 @@ import 'package:trinetraflutter/camera_view.dart';
 import 'package:trinetraflutter/quads/PosePointer_HighKnees.dart';
 import 'package:trinetraflutter/values.dart';
 
-
 class HighKnees extends StatefulWidget {
   const HighKnees({super.key});
 
@@ -43,10 +42,11 @@ class _HighKneesState extends State<HighKnees> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-        customPaint: customPaint,
-        onImage: (inputImage) {
-          processImage(inputImage);
-        },);
+      customPaint: customPaint,
+      onImage: (inputImage) {
+        processImage(inputImage);
+      },
+    );
   }
 
   Future<void> processImage(InputImage inputImage) async {
