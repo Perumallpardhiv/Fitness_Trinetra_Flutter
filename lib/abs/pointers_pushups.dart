@@ -72,8 +72,10 @@ class PosePainter_pushUp extends CustomPainter {
       }
       print("Angle: $angle");
       print("Angler: $angler");
-      if ((stage != "down" && angle > 20 && angle < 60) ||
-          (stage != "down" && angler > 20 && angler < 60)) {
+      if ((stage != "down" && angle > 10 && angle < 40) ||
+          (stage != "down" && angler > 10 && angler < 40) ||
+          (stage != "down" && angle > 150 && angle < 170) ||
+          (stage != "down" && angler > 150 && angler < 170)) {
         stage = "down";
         color = Colors.green;
       }
@@ -85,7 +87,9 @@ class PosePainter_pushUp extends CustomPainter {
         align = false;
       }
       if ((stage == "down" && angle >= 0 && angle < 10) ||
-          (stage == "down" && angler >= 0 && angler < 10)) {
+          (stage == "down" && angler >= 0 && angler < 10) ||
+          (stage == "down" && angle > 170 && angle < 190) ||
+          (stage == "down" && angler > 170 && angler < 190)) {
         counter++;
         stage = "up";
       }

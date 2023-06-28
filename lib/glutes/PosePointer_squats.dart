@@ -60,7 +60,7 @@ class PosePainter_Squates extends CustomPainter {
               atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
+      angler = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
               atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
           180 ~/
           PI;
@@ -68,19 +68,13 @@ class PosePainter_Squates extends CustomPainter {
       if (angle < 0) {
         angle = angle + 360;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
+      if (angler < 0) {
+        angler = angler + 360;
       }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
       print("Angle: $angle");
-      print("Angle1: $angle1");
+      print("Angler: $angler");
       if ((angle > 175 && angle < 185 && stage != "down") &&
-          (angle1 > 175 && angle1 < 185 && stage != "down")) {
+          (angler > 175 && angle1 < 185 && stage != "down")) {
         stage = "down";
         color = Colors.green;
       }
@@ -91,8 +85,10 @@ class PosePainter_Squates extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 310 && angle < 330 && stage == "down") &&
-          (angle1 > 310 && angle1 < 330 && stage == "down")) {
+      if (((angle > 310 && angle < 330 && stage == "down") &&
+              (angler > 310 && angler < 330 && stage == "down")) ||
+          ((angle > 30 && angle < 50 && stage == "down") &&
+              (angler > 30 && angler < 50 && stage == "down"))) {
         counter++;
         stage = "up";
       }
