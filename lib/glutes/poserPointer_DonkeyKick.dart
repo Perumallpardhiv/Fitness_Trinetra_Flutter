@@ -59,41 +59,19 @@ class PosePointer_DonkeyKick extends CustomPainter {
       angle = (atan2(landmark2.y - landmark3.y, landmark2.x - landmark3.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark5.y - landmark6.y, landmark5.x - landmark6.x)) *
+      angler = (atan2(landmark5.y - landmark6.y, landmark5.x - landmark6.x)) *
           180 ~/
           PI;
 
       if (angle < 0) {
         angle = angle + 360;
       }
-
       if (angler < 0) {
         angler = angler + 360;
       }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if ((angle > 335 &&
-              angle < 350 &&
-              angle1 > 280 &&
-              angle1 < 290 &&
-              stage != "down") ||
-          (angle1 > 335 &&
-              angle1 < 350 &&
-              angle > 280 &&
-              angle < 290 &&
-              stage != "down")) {
+      print("Angler: $angler");
+      if ((angle > 55 && angle < 75 && angler > 0 && angler < 20 && stage != "down") || (angle > 95 && angle < 115 && angler > 170 && angler < 190 && stage != "down")) {
         stage = "down";
         color = Colors.green;
       }
@@ -104,16 +82,7 @@ class PosePointer_DonkeyKick extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 335 &&
-              angle < 350 &&
-              angle1 > 280 &&
-              angle1 < 290 &&
-              stage == "down") ||
-          (angle1 > 335 &&
-              angle1 < 350 &&
-              angle > 280 &&
-              angle < 290 &&
-              stage == "down")) {
+      if ((angle > 0 && angle < 20 && angler > 55 && angler < 75 && stage == "down") || (angle > 170 && angle < 190 && angler > 95 && angler < 115 && stage == "down")) {
         counter++;
         stage = "up";
       }

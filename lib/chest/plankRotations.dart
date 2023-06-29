@@ -43,10 +43,11 @@ class _PlankRotationsState extends State<PlankRotations> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-        customPaint: customPaint,
-        onImage: (inputImage) {
-          processImage(inputImage);
-        });
+      customPaint: customPaint,
+      onImage: (inputImage) {
+        processImage(inputImage);
+      },
+    );
   }
 
   Future<void> processImage(InputImage inputImage) async {

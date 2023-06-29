@@ -60,7 +60,7 @@ class PosePointer_SideLegRises extends CustomPainter {
               atan2(landmark1.y - landmark2.y, landmark1.x - landmark2.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark6.y - landmark5.y, landmark6.x - landmark5.x) -
+      angler = (atan2(landmark6.y - landmark5.y, landmark6.x - landmark5.x) -
               atan2(landmark4.y - landmark5.y, landmark4.x - landmark5.x)) *
           180 ~/
           PI;
@@ -72,26 +72,13 @@ class PosePointer_SideLegRises extends CustomPainter {
       if (angler < 0) {
         angler = angler + 360;
       }
-
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if ((angle > 95 &&
-              angle < 110 &&
-              angle1 > 195 &&
-              angle1 < 210 &&
-              stage != "down") ||
-          (angle1 > 255 &&
-              angle1 < 265 &&
-              angle > 160 &&
-              angle < 170 &&
-              stage != "down")) {
+      print("Angler: $angler");
+      if (angle > 115 &&
+          angle < 135 &&
+          angler > 195 &&
+          angler < 215 &&
+          stage != "down") {
         stage = "down";
         counter++;
         color = Colors.green;
@@ -103,16 +90,11 @@ class PosePointer_SideLegRises extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 95 &&
-              angle < 110 &&
-              angle1 > 195 &&
-              angle1 < 210 &&
-              stage != "down") ||
-          (angle1 > 255 &&
-              angle1 < 265 &&
-              angle > 160 &&
-              angle < 170 &&
-              stage != "down")) {
+      if (angle > 145 &&
+          angle < 160 &&
+          angler > 240 &&
+          angler < 260 &&
+          stage == "down") {
         counter++;
         stage = "up";
       }
