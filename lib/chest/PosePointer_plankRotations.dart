@@ -57,42 +57,14 @@ class PosePointer_PlankRotations extends CustomPainter {
       final left6 = pose.landmarks[rightpos3]!; //shoulder
 
       angle = (atan2(left1.y - left4.y, left1.x - left4.x)) * 180 ~/ PI;
-      // angle1 = (atan2(landmark5.y - landmark6.y, landmark5.x - landmark6.x)) *
-      //     180 ~/
-      //     PI;
-
-      // angler = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
-      //         atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
-      //     180 ~/
-      //     PI;
-      // angle1r = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
-      //         atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
-      //     180 ~/
-      //     PI;
 
       if (angle < 0) {
-        angle = angle + 360;
+        angle = angle * -1;
       }
-
-      if (angler < 0) {
-        angler = angler + 360;
-      }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
-      // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
+      
       print("Angle: $angle");
-      // print("Angle1: $angle1");
-      if (angle > 150 && angle < 200 && stage != "down" && left6.y < left4.y) {
-        stage = "down";
+      if (angle > 65 && angle < 85 && stage != "down") {
+      stage = "down";
         color = Colors.green;
       }
       if (stage == "down") {
@@ -102,7 +74,7 @@ class PosePointer_PlankRotations extends CustomPainter {
         color = Colors.deepPurple;
         align = false;
       }
-      if (angle > 150 && angle < 200 && stage == "down" && left6.y < left4.y) {
+      if (angle > 105 && angle < 125 && stage == "down") {
         counter++;
         stage = "up";
       }
