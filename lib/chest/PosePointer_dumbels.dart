@@ -60,27 +60,21 @@ class PosePainter_dumbels extends CustomPainter {
               atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
           180 ~/
           PI;
-      angle1 = (atan2(landmark5.y - landmark2.y, landmark5.x - landmark2.x) -
-              atan2(landmark.y - landmark2.y, landmark.x - landmark2.x)) *
+      angler = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
+              atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
           180 ~/
           PI;
 
-      if (angle < 0) {
-        angle = angle + 360;
-      }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
+      // if (angle < 0) {
+      //   angle = angle + 360;
       // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
+      // if (angler < 0) {
+      //   angler = angler + 360;
       // }
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if ((angle > 50 && angle < 70 && stage != "down") &&
-          (angle1 > 50 && angle1 < 70 && stage != "down")) {
+      // print("Angler: $angler");
+      if ((angle > 30 && angle < 60 && stage != "down") ||
+          (angler > 30 && angler < 60 && stage != "down")) {
         stage = "down";
         color = Colors.green;
       }
@@ -88,11 +82,11 @@ class PosePainter_dumbels extends CustomPainter {
         color = Colors.green;
         align = true;
       } else {
-        color = Colors.red;
+        color = Colors.deepPurple;
         align = false;
       }
-      if ((angle > 120 && angle < 140 && stage == "down") &&
-          (angle1 > 120 && angle1 < 140 && stage == "down")) {
+      if ((angle > 120 && angle < 140 && stage == "down") ||
+          (angler > 155 && angler < 175 && stage == "down")) {
         counter++;
         stage = "up";
       }

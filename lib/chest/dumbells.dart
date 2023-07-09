@@ -27,15 +27,11 @@ class _dumbellsState extends State<dumbells> {
 
   Future<void> storeCalories() async {
     print("Calories Counted");
-    calculate();
-  }
-
-  Future<void> calculate() async {
     final prefs = await SharedPreferences.getInstance();
     var calories = prefs.getInt('chest') ?? 0;
     var cal = calories + (counter * 0.02).toInt();
     prefs.setInt('chest', cal);
-    print("Calories Counted:${cal}");
+    print("Counter: $counter \n Calories: $cal");
   }
 
   @override
