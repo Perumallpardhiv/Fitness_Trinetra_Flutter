@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/back/posePointer_superman.dart';
-import 'package:trinetraflutter/camera_view.dart';
-import 'package:trinetraflutter/values.dart';
+import 'package:trinetraflutter/camera_view_timer.dart';
+import 'package:trinetraflutter/values_timer.dart';
 
 class Superman extends StatefulWidget {
   const Superman({super.key});
@@ -14,6 +14,10 @@ class Superman extends StatefulWidget {
 
 class _SupermanState extends State<Superman> {
   PoseDetector poseDetector = GoogleMlKit.vision.poseDetector();
+  PoseLandmarkType pos1 = PoseLandmarkType.leftEar;
+  PoseLandmarkType pos2 = PoseLandmarkType.leftHip;
+  PoseLandmarkType pos3 = PoseLandmarkType.leftAnkle;
+
   bool isBusy = false;
   CustomPaint? customPaint;
 
@@ -21,14 +25,14 @@ class _SupermanState extends State<Superman> {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
     var calories = prefs.getInt('back') ?? 0;
-    var cal = calories + (counter * 0.3).toInt();
+    var cal = calories + (timer * 0.3).toInt();
     prefs.setInt('back', cal);
-    print("Counter: $counter \n Calories: $cal");
+    print("Time: $timer \n Calories: $cal");
   }
 
   @override
   void initState() {
-    ResetValue();
+    ResetTimerValue();
     super.initState();
   }
 
@@ -41,7 +45,7 @@ class _SupermanState extends State<Superman> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return CameraViewTimer(
       customPaint: customPaint,
       onImage: (inputImage) {
         processImage(inputImage);
@@ -53,26 +57,22 @@ class _SupermanState extends State<Superman> {
     if (isBusy) return;
     isBusy = true;
     final poses = await poseDetector.processImage(inputImage);
-    const PoseLandmarkType pos1 = PoseLandmarkType.rightWrist;
-    const PoseLandmarkType pos2 = PoseLandmarkType.rightHip;
-    const PoseLandmarkType pos3 = PoseLandmarkType.rightKnee;
 
-    // final faces = await faceDetector.processImage(inputImage);
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
       final painter = PosePointer_Superman(
-            poses,
-            inputImage.inputImageData!.size,
-            inputImage.inputImageData!.imageRotation,
-            110,
-            125,
-            75,
-            95,
-            pos1,
-            pos2,
-            pos3,
-          ),
-          customPaint = CustomPaint(painter: painter);
+        poses,
+        inputImage.inputImageData!.size,
+        inputImage.inputImageData!.imageRotation,
+        110,
+        125,
+        75,
+        95,
+        pos1,
+        pos2,
+        pos3,
+      );
+      customPaint = CustomPaint(painter: painter);
     } else {
       customPaint = null;
     }
