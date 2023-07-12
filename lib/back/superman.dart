@@ -24,10 +24,20 @@ class _SupermanState extends State<Superman> {
   Future<void> storeCalories() async {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
-    var calories = prefs.getInt('back') ?? 0;
-    var cal = calories + (timer * 0.3).toInt();
-    prefs.setInt('back', cal);
-    print("Time: $timer \n Calories: $cal");
+    var cal = (timer * 0.2).ceilToDouble();
+
+    if(prefs.getString('date') != null){
+      if(prefs.getString('date') == "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}"){
+        var calories = prefs.getDouble('back') ?? 0;
+        cal = calories + cal;
+        prefs.setDouble('back', cal);
+      } else {
+        prefs.setDouble('back', cal);
+      }
+    } else {
+      prefs.setDouble('back', cal);
+    }
+    print("Counter: $timer \n Calories: $cal");
   }
 
   @override

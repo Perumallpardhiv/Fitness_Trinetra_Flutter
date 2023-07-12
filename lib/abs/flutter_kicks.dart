@@ -20,9 +20,19 @@ class _FlutterKicksState extends State<FlutterKicks> {
   Future<void> storeCalories() async {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
-    var calories = prefs.getInt('abs') ?? 0;
-    var cal = calories + (counter * 0.3).toInt();
-    prefs.setInt('abs', cal);
+    var cal = (counter * 0.2).ceilToDouble();
+
+    if(prefs.getString('date') != null){
+      if(prefs.getString('date') == "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}"){
+        var calories = prefs.getDouble('abs') ?? 0;
+        cal = calories + cal;
+        prefs.setDouble('abs', cal);
+      } else {
+        prefs.setDouble('abs', cal);
+      }
+    } else {
+      prefs.setDouble('abs', cal);
+    }
     print("Counter: $counter \n Calories: $cal");
   }
 

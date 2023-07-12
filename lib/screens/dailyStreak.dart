@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/bargraph/bargraph.dart';
 import 'package:trinetraflutter/screens/profileScreen.dart';
 
@@ -14,16 +15,63 @@ class DailyStreak extends StatefulWidget {
 
 class _DailyStreakState extends State<DailyStreak> {
   final userDetails = FirebaseAuth.instance.currentUser;
+  late SharedPreferences prefs;
+  late double abs = 0;
+  late double quads = 0;
+  late double glutes = 0;
+  late double chest = 0;
+  late double back = 0;
+
+  Map<String, double> dataMap = {
+    "Abs": 0,
+    "Quads": 0,
+    "Glutes": 0,
+    "Chest": 0,
+    "Back": 0,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    preference();
+  }
+
+  preference() async {
+    prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('date') != null) {
+      if (prefs.getString('date') ==
+          "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}") {
+        abs = prefs.getDouble('abs') ?? 0;
+        quads = prefs.getDouble('quads') ?? 0;
+        glutes = prefs.getDouble('glutes') ?? 0;
+        chest = prefs.getDouble('chest') ?? 0;
+        back = prefs.getDouble('back') ?? 0;
+      } else {
+        abs = 0;
+        quads = 0;
+        glutes = 0;
+        chest = 0;
+        back = 0;
+      }
+    } else {
+      abs = prefs.getDouble('abs') ?? 0;
+      quads = prefs.getDouble('quads') ?? 0;
+      glutes = prefs.getDouble('glutes') ?? 0;
+      chest = prefs.getDouble('chest') ?? 0;
+      back = prefs.getDouble('back') ?? 0;
+    }
+    dataMap = {
+      "Abs": abs,
+      "Quads": quads,
+      "Glutes": glutes,
+      "Chest": chest,
+      "Back": back,
+    };
+    setState(() {});
+  }
 
   List<dynamic> cal = [];
   List<double> cal2 = [];
-
-  Map<String, double> dataMap = {
-    "Abs": 32,
-    "Quads": 65,
-    "Glutes": 29,
-    "Chest": 31,
-  };
 
   @override
   Widget build(BuildContext context) {
