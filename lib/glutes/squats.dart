@@ -28,9 +28,19 @@ class _SquatesState extends State<Squates> {
         cal = calories + cal;
         prefs.setDouble('glutes', cal);
       } else {
+        prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
         prefs.setDouble('glutes', cal);
+        double abs = prefs.getDouble('abs') ?? 0;
+        double quads = prefs.getDouble('quads') ?? 0;
+        double chest = prefs.getDouble('chest') ?? 0;
+        double back = prefs.getDouble('back') ?? 0;
+        prefs.setDouble('abs', abs);
+        prefs.setDouble('quads', quads);
+        prefs.setDouble('chest', chest);
+        prefs.setDouble('back', back);
       }
     } else {
+      prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
       prefs.setDouble('glutes', cal);
     }
     print("Counter: $counter \n Calories: $cal");

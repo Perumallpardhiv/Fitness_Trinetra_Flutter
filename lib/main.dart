@@ -13,12 +13,12 @@ List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SharedPreferences shares = await SharedPreferences.getInstance();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  await Firebase.initializeApp();
   cameras = await availableCameras();
   runApp(
     DevicePreview(

@@ -28,9 +28,19 @@ class _HighKneesState extends State<HighKnees> {
         cal = calories + cal;
         prefs.setDouble('quads', cal);
       } else {
+        prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
         prefs.setDouble('quads', cal);
+        double abs = prefs.getDouble('abs') ?? 0;
+        double glutes = prefs.getDouble('glutes') ?? 0;
+        double chest = prefs.getDouble('chest') ?? 0;
+        double back = prefs.getDouble('back') ?? 0;
+        prefs.setDouble('abs', abs);
+        prefs.setDouble('glutes', glutes);
+        prefs.setDouble('chest', chest);
+        prefs.setDouble('back', back);
       }
     } else {
+      prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
       prefs.setDouble('quads', cal);
     }
     print("Counter: $counter \n Calories: $cal");

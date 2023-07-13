@@ -25,6 +25,9 @@ class _OnBoardingState extends State<OnBoarding> {
     SharedPreferences shares = await SharedPreferences.getInstance();
     bool logg = shares.getBool('isLogged') ?? false;
     logg ? isLogged = true : isLogged = false;
+
+    final prefs = await SharedPreferences.getInstance();
+    print(prefs.getKeys());
   }
 
   @override

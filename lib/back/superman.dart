@@ -32,9 +32,19 @@ class _SupermanState extends State<Superman> {
         cal = calories + cal;
         prefs.setDouble('back', cal);
       } else {
+        prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
         prefs.setDouble('back', cal);
+        double abs = prefs.getDouble('abs') ?? 0;
+        double quads = prefs.getDouble('quads') ?? 0;
+        double glutes = prefs.getDouble('glutes') ?? 0;
+        double chest = prefs.getDouble('chest') ?? 0;
+        prefs.setDouble('abs', abs);
+        prefs.setDouble('quads', quads);
+        prefs.setDouble('glutes', glutes);
+        prefs.setDouble('chest', chest);
       }
     } else {
+      prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
       prefs.setDouble('back', cal);
     }
     print("Counter: $timer \n Calories: $cal");

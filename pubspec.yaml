@@ -39,7 +39,7 @@ dependencies:
   shared_preferences: ^2.1.2
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
-  cloud_firestore: ^4.8.1
+  cloud_firestore: ^4.8.2
   google_sign_in: ^6.1.4
   curved_navigation_bar: ^1.0.3
   pie_chart: ^5.3.2

@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const Icon(Icons.email),
                                 const SizedBox(width: 10.0),
                                 Text(
-                                  details['email'],
+                                  details['email'] ?? "",
                                   style: const TextStyle(
                                     fontSize: 16.0,
                                     letterSpacing: 1.0,
@@ -152,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 const SizedBox(width: 10.0),
                                 Text(
-                                  details['joinedAt'],
+                                  details['joinedAt'] ?? "",
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                     letterSpacing: 0.7,
@@ -168,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onTap: () async {
                                     final prefs =
                                         await SharedPreferences.getInstance();
-                                    print(prefs.getInt('abs'));
+                                    print(prefs.getDouble('abs'));
                                   },
                                   child: SizedBox(
                                     height: 60,

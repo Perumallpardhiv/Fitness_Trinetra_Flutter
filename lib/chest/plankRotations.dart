@@ -29,9 +29,19 @@ class _PlankRotationsState extends State<PlankRotations> {
         cal = calories + cal;
         prefs.setDouble('chest', cal);
       } else {
+        prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
         prefs.setDouble('chest', cal);
+        double abs = prefs.getDouble('abs') ?? 0;
+        double quads = prefs.getDouble('quads') ?? 0;
+        double glutes = prefs.getDouble('glutes') ?? 0;
+        double back = prefs.getDouble('back') ?? 0;
+        prefs.setDouble('abs', abs);
+        prefs.setDouble('quads', quads);
+        prefs.setDouble('glutes', glutes);
+        prefs.setDouble('back', back);
       }
     } else {
+      prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
       prefs.setDouble('chest', cal);
     }
     print("Counter: $counter \n Calories: $cal");
