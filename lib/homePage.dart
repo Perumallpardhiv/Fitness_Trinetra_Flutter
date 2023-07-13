@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trinetraflutter/main.dart';
 import 'package:trinetraflutter/screens/dailyStreak.dart';
 import 'package:trinetraflutter/screens/gym.dart';
+import 'package:trinetraflutter/screens/heartBeat.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,13 +22,14 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.stacked_bar_chart_outlined),
     const Icon(Icons.fitness_center),
     const Icon(Icons.sports_gymnastics_outlined),
+    const Icon(Icons.monitor_heart_outlined),
   ];
 
   final screens = [
     const DailyStreak(),
     const Gym(),
     Container(),
-    // const Yoga(),
+    HeartBeat(cameras: cameras!),
   ];
 
   @override

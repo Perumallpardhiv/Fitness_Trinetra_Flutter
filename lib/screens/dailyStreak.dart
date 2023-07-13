@@ -198,7 +198,7 @@ class _DailyStreakState extends State<DailyStreak> {
                                 chartType: ChartType.disc,
                                 centerText: "CALORIES",
                                 centerTextStyle: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   color: value.themeMode == ThemeMode.dark
                                       ? Colors.white
                                       : Colors.grey.shade800,
