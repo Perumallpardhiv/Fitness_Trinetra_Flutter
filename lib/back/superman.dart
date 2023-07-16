@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/back/posePointer_superman.dart';
 import 'package:trinetraflutter/camera_view_timer.dart';
+import 'package:trinetraflutter/routine_value.dart';
 import 'package:trinetraflutter/values_timer.dart';
 
 class Superman extends StatefulWidget {
@@ -25,14 +28,26 @@ class _SupermanState extends State<Superman> {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
     var cal = (timer * 0.2).ceilToDouble();
+    var userDetails = FirebaseAuth.instance.currentUser;
 
-    if(prefs.getString('date') != null){
-      if(prefs.getString('date') == "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}"){
+    if (prefs.getString('date') != null) {
+      if (prefs.getString('date') ==
+          "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}") {
         var calories = prefs.getDouble('back') ?? 0;
+        routine[6] = routine[6] + cal;
         cal = calories + cal;
         prefs.setDouble('back', cal);
+        await FirebaseFirestore.instance
+            .collection('userInfo')
+            .doc(userDetails!.uid)
+            .update(
+          {
+            "routine": routine,
+          },
+        );
       } else {
-        prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
+        prefs.setString('date',
+            "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
         prefs.setDouble('back', cal);
         double abs = prefs.getDouble('abs') ?? 0;
         double quads = prefs.getDouble('quads') ?? 0;
@@ -42,10 +57,32 @@ class _SupermanState extends State<Superman> {
         prefs.setDouble('quads', quads);
         prefs.setDouble('glutes', glutes);
         prefs.setDouble('chest', chest);
+
+        routine.removeAt(0);
+        routine.add(cal);
+        await FirebaseFirestore.instance
+            .collection('userInfo')
+            .doc(userDetails!.uid)
+            .update(
+          {
+            "routine": routine,
+          },
+        );
       }
     } else {
-      prefs.setString('date',"${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
+      prefs.setString('date',
+          "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
       prefs.setDouble('back', cal);
+      routine.removeAt(0);
+      routine.add(cal);
+      await FirebaseFirestore.instance
+          .collection('userInfo')
+          .doc(userDetails!.uid)
+          .update(
+        {
+          "routine": routine,
+        },
+      );
     }
     print("Counter: $timer \n Calories: $cal");
   }
