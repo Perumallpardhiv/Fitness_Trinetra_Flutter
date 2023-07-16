@@ -35,7 +35,7 @@ class _SignInState extends State<SignIn> {
                   alignment: Alignment.center,
                   height: size.height,
                   width: size.width,
-                  color: Colors.deepPurple[300],
+                  color: Theme.of(context).colorScheme.tertiary,
                   child: Padding(
                     padding: EdgeInsets.only(top: size.height * 0.12),
                     child: const Column(
@@ -70,9 +70,9 @@ class _SignInState extends State<SignIn> {
                 child: Container(
                   height: size.height * 0.7,
                   width: size.width,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(80),
                       topRight: Radius.circular(80),
                     ),
@@ -94,24 +94,24 @@ class _SignInState extends State<SignIn> {
                                 keyboardType: TextInputType.emailAddress,
                                 controller: _emailCont,
                                 decoration: InputDecoration(
-                                  fillColor:
-                                      const Color.fromARGB(255, 199, 142, 122),
                                   labelText: "Email ...",
                                   labelStyle: const TextStyle(
                                     color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       width: 1.5,
-                                      color: Colors.deepPurple,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                       width: 1.5,
-                                      color: Colors.deepPurple,
                                     ),
                                   ),
                                 ),
@@ -134,7 +134,8 @@ class _SignInState extends State<SignIn> {
                                     pwd == true
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -148,16 +149,18 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -185,12 +188,13 @@ class _SignInState extends State<SignIn> {
                               width: MediaQuery.of(context).size.width - 60,
                               child: Card(
                                 elevation: 7,
-                                color: Colors.deepPurple,
+                                color: Theme.of(context).colorScheme.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  side: const BorderSide(
+                                  side: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 child: const Center(
@@ -219,7 +223,7 @@ class _SignInState extends State<SignIn> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const SignUp(),
+                                      builder: (context) => SignUp(),
                                     ),
                                   );
                                 },

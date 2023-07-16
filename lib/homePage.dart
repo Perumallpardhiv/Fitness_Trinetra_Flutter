@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trinetraflutter/main.dart';
+import 'package:trinetraflutter/routine_value.dart';
 import 'package:trinetraflutter/screens/dailyStreak.dart';
 import 'package:trinetraflutter/screens/gym.dart';
 import 'package:trinetraflutter/screens/heartBeat.dart';
@@ -36,7 +38,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: screens[index],
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('userInfo')
+            .doc(userDetails!.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: Text("Loading..."));
+          }
+          var details = snapshot.data;
+          print(details!['routine']);
+          List<dynamic> cal = details['routine'];
+          routine.clear();
+          for (var element in cal) {
+            double ele = element.toDouble();
+            routine.add(ele);
+          }
+          return screens[index];
+        },
+      ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           iconTheme: const IconThemeData(

@@ -116,7 +116,7 @@ class _CameraViewTimerState extends State<CameraViewTimer> {
         _controller!.startImageStream(_processCameraImage).catchError((e) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           );
         });
         stream != stream;

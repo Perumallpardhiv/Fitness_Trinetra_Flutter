@@ -28,6 +28,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
     final prefs = await SharedPreferences.getInstance();
     print(prefs.getKeys());
+    print(prefs.get('date'));
   }
 
   @override
@@ -138,8 +139,10 @@ class _OnBoardingState extends State<OnBoarding> {
                                       (route) => false,
                                     );
                                   },
-                                  fillColor: Theme.of(context).colorScheme.primary,
-                                  focusColor: Theme.of(context).colorScheme.primary,
+                                  fillColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  focusColor:
+                                      Theme.of(context).colorScheme.primary,
                                   shape: const StadiumBorder(),
                                   elevation: 0,
                                   child: const Text(

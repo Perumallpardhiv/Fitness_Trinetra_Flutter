@@ -116,7 +116,7 @@ class _CameraViewState extends State<CameraView> {
         _controller!.startImageStream(_processCameraImage).catchError((e) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           );
         });
         stream != stream;

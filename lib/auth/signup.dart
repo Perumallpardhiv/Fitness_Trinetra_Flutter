@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trinetraflutter/auth/auth.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  SignUp({super.key});
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -28,6 +28,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -41,7 +42,7 @@ class _SignUpState extends State<SignUp> {
                   alignment: Alignment.center,
                   height: size.height,
                   width: size.width,
-                  color: Colors.deepPurple[300],
+                  color: Theme.of(context).colorScheme.tertiary,
                   child: Padding(
                     padding: EdgeInsets.only(top: size.height * 0.12),
                     child: const Column(
@@ -74,9 +75,9 @@ class _SignUpState extends State<SignUp> {
                 child: Container(
                   height: size.height * 0.7,
                   width: size.width,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(80),
                       topRight: Radius.circular(80),
                     ),
@@ -106,16 +107,18 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       width: 1.5,
-                                      color: Colors.deepPurple,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       width: 1.5,
-                                      color: Colors.deepPurple,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                 ),
@@ -139,16 +142,18 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -168,7 +173,8 @@ class _SignUpState extends State<SignUp> {
                                     pwd == true
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -182,16 +188,18 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -211,7 +219,8 @@ class _SignUpState extends State<SignUp> {
                                     conf_pwd == true
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -225,16 +234,18 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -259,21 +270,21 @@ class _SignUpState extends State<SignUp> {
                                 prefs.setString('pwd', _pwdCont.text.trim());
 
                                 var userDetails =
-                                    await FirebaseAuth.instance.currentUser;
+                                    FirebaseAuth.instance.currentUser;
                                 print(userDetails);
 
                                 await FirebaseFirestore.instance
                                     .collection('userInfo')
-                                    .doc(userDetails?.uid)
+                                    .doc(userDetails!.uid)
                                     .set(
                                   {
-                                    'uid': userDetails?.uid,
-                                    'email': userDetails?.email,
+                                    'uid': userDetails.uid,
+                                    'email': userDetails.email,
                                     'name': name.text,
                                     'joinedAt': formattedData,
                                     'age': "18",
                                     'description': "Exercise for Fitness",
-                                    "routine": [10, 12, 14, 16, 18, 20, 22],
+                                    "routine": [0, 0, 0, 0, 0, 0, 0],
                                   },
                                 );
                               } else {
@@ -291,21 +302,23 @@ class _SignUpState extends State<SignUp> {
                               width: MediaQuery.of(context).size.width - 60,
                               child: Card(
                                 elevation: 7,
-                                color: Colors.deepPurple,
+                                color: Theme.of(context).colorScheme.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  side: const BorderSide(
+                                  side: BorderSide(
                                     width: 1.5,
-                                    color: Colors.deepPurple,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 child: const Center(
-                                    child: Text(
-                                  'SIGN IN',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  child: Text(
+                                    'SIGN UP',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                )),
+                                ),
                               ),
                             ),
                           ),
@@ -313,14 +326,16 @@ class _SignUpState extends State<SignUp> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text("If you don't have account? "),
+                              const Text("If you already have account? "),
                               const SizedBox(width: 1),
                               GestureDetector(
                                 child: const Text(
-                                  " SignUp ",
+                                  " SignIn ",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
                               ),
                             ],
                           ),
