@@ -21,6 +21,7 @@ import 'package:trinetraflutter/quads/lunges.dart';
 import 'package:trinetraflutter/screens/profileScreen.dart';
 import 'package:trinetraflutter/theme_provider.dart';
 import 'package:trinetraflutter/widgets/gifDialog.dart';
+import 'package:trinetraflutter/yoga/elbow_plank.dart';
 
 class Gym extends StatefulWidget {
   const Gym({super.key});
@@ -61,6 +62,7 @@ final glutes_count = [
 
 final back_count = [
   'assets/images/superman.jpg',
+  'assets/images/elbowplanks.png',
 ];
 
 final chest_count = [
@@ -727,7 +729,13 @@ class _GymState extends State<Gym> {
                                                 const Superman(),
                                           ),
                                         )
-                                      : null;
+                                      : Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ElbowPlank(),
+                                          ),
+                                        );
                                 },
                                 child: Consumer<ThemeProvider>(
                                   builder: (context, value, child) {

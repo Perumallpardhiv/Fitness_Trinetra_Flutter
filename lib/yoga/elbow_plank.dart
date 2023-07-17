@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trinetraflutter/camera_view.dart';
-import 'package:trinetraflutter/values.dart';
-
-import 'pointer_elbow.dart';
+import 'package:trinetraflutter/camera_view_timer.dart';
+import 'package:trinetraflutter/routine_value.dart';
+import 'package:trinetraflutter/values_timer.dart';
+import 'package:trinetraflutter/yoga/pointer_elbow.dart';
 
 class ElbowPlank extends StatefulWidget {
   const ElbowPlank({super.key});
@@ -15,34 +17,94 @@ class ElbowPlank extends StatefulWidget {
 
 class _ElbowPlankState extends State<ElbowPlank> {
   PoseDetector poseDetector = GoogleMlKit.vision.poseDetector();
+  final PoseLandmarkType leftpos1 = PoseLandmarkType.leftShoulder;
+  final PoseLandmarkType leftpos2 = PoseLandmarkType.leftElbow;
+  final PoseLandmarkType leftpos3 = PoseLandmarkType.leftWrist;
+  final PoseLandmarkType rightpos1 = PoseLandmarkType.rightShoulder;
+  final PoseLandmarkType rightpos2 = PoseLandmarkType.rightElbow;
+  final PoseLandmarkType rightpos3 = PoseLandmarkType.rightWrist;
   bool isBusy = false;
   CustomPaint? customPaint;
 
   Future<void> storeCalories() async {
     print("Calories Counted");
     final prefs = await SharedPreferences.getInstance();
-    var calories = prefs.getInt('abs') ?? 0;
-    var cal = calories + (counter * 0.15).toInt();
-    prefs.setInt('abs', cal);
-    print("Counter: $counter \n Calories: $cal");
+    var cal = (timer * 0.25).ceilToDouble();
+    var userDetails = FirebaseAuth.instance.currentUser;
+
+    if (prefs.getString('date') != null) {
+      if (prefs.getString('date') ==
+          "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}") {
+        var calories = prefs.getDouble('back') ?? 0;
+        routine[6] = routine[6] + cal;
+        cal = calories + cal;
+        prefs.setDouble('back', cal);
+        await FirebaseFirestore.instance
+            .collection('userInfo')
+            .doc(userDetails!.uid)
+            .update(
+          {
+            "routine": routine,
+          },
+        );
+      } else {
+        prefs.setString('date',
+            "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
+        prefs.setDouble('back', cal);
+        double abs = prefs.getDouble('abs') ?? 0;
+        double quads = prefs.getDouble('quads') ?? 0;
+        double glutes = prefs.getDouble('glutes') ?? 0;
+        double chest = prefs.getDouble('chest') ?? 0;
+        prefs.setDouble('abs', abs);
+        prefs.setDouble('quads', quads);
+        prefs.setDouble('glutes', glutes);
+        prefs.setDouble('chest', chest);
+
+        routine.removeAt(0);
+        routine.add(cal);
+        await FirebaseFirestore.instance
+            .collection('userInfo')
+            .doc(userDetails!.uid)
+            .update(
+          {
+            "routine": routine,
+          },
+        );
+      }
+    } else {
+      prefs.setString('date',
+          "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}");
+      prefs.setDouble('back', cal);
+      routine.removeAt(0);
+      routine.add(cal);
+      await FirebaseFirestore.instance
+          .collection('userInfo')
+          .doc(userDetails!.uid)
+          .update(
+        {
+          "routine": routine,
+        },
+      );
+    }
+    print("Counter: $timer \n Calories: $cal");
   }
 
   @override
   void initState() {
-    ResetValue();
+    ResetTimerValue();
     super.initState();
   }
 
   @override
   void dispose() async {
     super.dispose();
-    await storeCalories();
+    // await storeCalories();
     await poseDetector.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return CameraViewTimer(
       customPaint: customPaint,
       onImage: (inputImage) {
         processImage(inputImage);
@@ -54,13 +116,6 @@ class _ElbowPlankState extends State<ElbowPlank> {
     if (isBusy) return;
     isBusy = true;
     final poses = await poseDetector.processImage(inputImage);
-    const PoseLandmarkType leftpos1 = PoseLandmarkType.leftShoulder;
-    const PoseLandmarkType leftpos2 = PoseLandmarkType.leftElbow;
-    const PoseLandmarkType leftpos3 = PoseLandmarkType.leftWrist;
-
-    const PoseLandmarkType rightpos1 = PoseLandmarkType.rightShoulder;
-    const PoseLandmarkType rightpos2 = PoseLandmarkType.rightElbow;
-    const PoseLandmarkType rightpos3 = PoseLandmarkType.rightWrist;
 
     // final faces = await faceDetector.processImage(inputImage);
     if (inputImage.inputImageData?.size != null &&

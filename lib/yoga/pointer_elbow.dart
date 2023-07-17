@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:trinetraflutter/translator.dart';
-import 'package:trinetraflutter/values.dart';
+import 'package:trinetraflutter/values_timer.dart';
 
 late Timer timetime;
 
@@ -60,54 +60,32 @@ class PosePainter_elbowPlank extends CustomPainter {
           180 ~/
           PI;
 
-      angle1 = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
+      angler = (atan2(landmark4.y - landmark3.y, landmark4.x - landmark3.x) -
               atan2(landmark1.y - landmark3.y, landmark1.x - landmark3.x)) *
           180 ~/
           PI;
 
-      if (angle < 0) {
-        angle = angle + 360;
-      }
+      // if (angle < 0) {
+      //   angle = angle + 360;
+      // }
 
-      if (angler < 0) {
-        angler = angler + 360;
-      }
-      // if (angle > 180) {
-      //   angle = 360 - angle;
+      // if (angler < 0) {
+      //   angler = angler + 360;
       // }
-      if (angle1 < 0) {
-        angle1 = angle1 + 360;
-      }
-      if (angle1r < 0) {
-        angle1r = angle1r + 360;
-      }
-      // if (angle1 > 180) {
-      //   angle1 = 360 - angle1;
-      // }
+
       print("Angle: $angle");
-      print("Angle1: $angle1");
-      if (stage != "down" &&
-          angle > 265 &&
-          angle < 285 &&
-          angle1 > 265 &&
-          angle1 < 285) {
-        stage = "down";
-        color = Colors.green;
-        timetime = Timer.periodic(Duration(seconds: 1), (time) {
-          counter++;
-        });
-      }
-      if (stage == "down") {
+      // print("Angler: $angler");
+      
+      if (angle > 135 && angle < 160) {
         color = Colors.green;
         align = true;
+        counter1++;
+        if (counter1 % 10 == 0) {
+          timer++;
+        }
       } else {
         color = Colors.deepPurple;
         align = false;
-      }
-      if (stage == "down" &&
-          ((angle < 265 || angle > 285) || (angle1 < 265 && angle1 > 285))) {
-        timetime.cancel();
-        stage = "up";
       }
 
       canvas.drawCircle(
