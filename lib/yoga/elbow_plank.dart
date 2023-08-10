@@ -98,7 +98,7 @@ class _ElbowPlankState extends State<ElbowPlank> {
   @override
   void dispose() async {
     super.dispose();
-    // await storeCalories();
+    await storeCalories();
     await poseDetector.close();
   }
 

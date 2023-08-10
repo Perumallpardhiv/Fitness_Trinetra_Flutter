@@ -1,11 +1,8 @@
-import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:trinetraflutter/translator.dart';
 import 'package:trinetraflutter/values_timer.dart';
-
-late Timer timetime;
 
 class PosePainter_elbowPlank extends CustomPainter {
   final List<Pose> poses;
