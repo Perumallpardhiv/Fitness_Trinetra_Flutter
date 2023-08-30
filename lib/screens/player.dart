@@ -12,16 +12,13 @@ class Player extends StatelessWidget {
 
   var controller = Get.put(PlayerController());
 
-  static const bgcolor = Color(0xff1F212C);
-  static const whitecolor = Color(0xffFFFFFF);
-  static const slidercolor = Color(0xff7E70FF);
-  static const buttoncolor = Color(0xff60E950);
-  static const bgDarkcolor = Color(0xff070B11);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ),
       body: Padding(
           padding: const EdgeInsets.all(10),
           child: Obx(() {
@@ -46,7 +43,7 @@ class Player extends StatelessWidget {
                           artworkWidth: double.infinity,
                           nullArtworkWidget: const Icon(
                             Icons.music_note_rounded,
-                            color: whitecolor,
+                            color: Colors.white,
                             size: 20,
                           ),
                         ),
@@ -65,11 +62,16 @@ class Player extends StatelessWidget {
                 const SizedBox(height: 10),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 10, right: 10),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .tertiary
+                          .withOpacity(0.65),
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(20),
+                        bottom: Radius.circular(20),
                       ),
                     ),
                     alignment: Alignment.center,
@@ -97,9 +99,9 @@ class Player extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: ourTextStyle(
-                            family: "one",
+                            family: "font2",
                             size: 15,
-                            color: bgDarkcolor,
+                            color: Theme.of(context).colorScheme.primary,
                             weight: FontWeight.w500,
                           ),
                         ),
@@ -110,15 +112,18 @@ class Player extends StatelessWidget {
                               Text(
                                 controller.position.value,
                                 style: ourTextStyle(
-                                  color: bgDarkcolor,
+                                  color: Theme.of(context).colorScheme.primary,
                                   size: 14,
                                 ),
                               ),
                               Expanded(
                                 child: Slider(
-                                  thumbColor: slidercolor,
-                                  activeColor: slidercolor,
-                                  inactiveColor: bgcolor,
+                                  thumbColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  activeColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  inactiveColor:
+                                      Theme.of(context).colorScheme.tertiary,
                                   value: controller.value.value,
                                   max: controller.max.value,
                                   min: const Duration(seconds: 0)
@@ -133,7 +138,7 @@ class Player extends StatelessWidget {
                               Text(
                                 controller.duration.value,
                                 style: ourTextStyle(
-                                  color: bgDarkcolor,
+                                  color: Theme.of(context).colorScheme.primary,
                                   size: 14,
                                 ),
                               ),
@@ -153,16 +158,17 @@ class Player extends StatelessWidget {
                                   controller.playindex.value - 1,
                                 );
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.skip_previous_rounded,
                                 size: 40,
-                                color: bgDarkcolor,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ),
                             Obx(() {
                               return CircleAvatar(
                                 radius: 35,
-                                backgroundColor: bgDarkcolor,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
                                 child: Transform.scale(
                                   scale: 1.5,
                                   child: IconButton(
@@ -179,15 +185,19 @@ class Player extends StatelessWidget {
                                       }
                                     },
                                     icon: !controller.isPlaying.value
-                                        ? const Icon(
+                                        ? Icon(
                                             Icons.play_arrow_rounded,
                                             size: 40,
-                                            color: whitecolor,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
                                           )
-                                        : const Icon(
+                                        : Icon(
                                             Icons.pause_rounded,
                                             size: 40,
-                                            color: whitecolor,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
                                           ),
                                   ),
                                 ),
@@ -202,10 +212,10 @@ class Player extends StatelessWidget {
                                   controller.playindex.value + 1,
                                 );
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.skip_next_rounded,
                                 size: 40,
-                                color: bgDarkcolor,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ),
                           ],
