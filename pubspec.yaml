@@ -54,6 +54,10 @@ dependencies:
   charts_flutter_new: ^0.12.0
   wakelock: ^0.6.2
   intl: ^0.17.0
+  get: ^4.6.5
+  just_audio: ^0.9.34
+  on_audio_query: ^2.9.0
+  permission_handler: ^10.4.3
   flutter_localizations:
     sdk: flutter
 

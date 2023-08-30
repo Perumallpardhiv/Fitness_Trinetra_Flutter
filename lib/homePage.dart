@@ -7,6 +7,7 @@ import 'package:trinetraflutter/routine_value.dart';
 import 'package:trinetraflutter/screens/dailyStreak.dart';
 import 'package:trinetraflutter/screens/gym.dart';
 import 'package:trinetraflutter/screens/heartBeat.dart';
+import 'package:trinetraflutter/screens/music.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   final screens = [
     const DailyStreak(),
     const Gym(),
-    Container(),
+    Music(),
     HeartBeat(cameras: cameras!),
   ];
 
