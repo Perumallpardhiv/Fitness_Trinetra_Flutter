@@ -30,16 +30,16 @@ _The application was refined extensively to improve accuracy and user experience
 ```
 lib/
 |- intro_screens/
-|- auth/
 |- abs/
 |- back/
 |- chest/
 |- glutes/
 |- quads/
 |- yoga/
-|- widgets/
 |- bargraph/
 |- controllers/
+|- auth/
+|- widgets/
 |- screens/
 |- main.dart
 ```
