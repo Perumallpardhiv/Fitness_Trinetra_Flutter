@@ -10,11 +10,11 @@ Building upon the latest advancements in technology, our cutting-edge workout ap
 
 **3. Cloud-Based Storage with Firebase:** Safeguard user data and progress by utilizing Firebase for secure and reliable cloud-based storage, enabling seamless access across devices.
 
-**4. Heart Rate Calculation:** Harness the power of the back camera and flashlight to calculate the user's heart rate, providing valuable insights into cardiovascular health and performance.
+<!-- **4. Heart Rate Calculation:** Harness the power of the back camera and flashlight to calculate the user's heart rate, providing valuable insights into cardiovascular health and performance. -->
 
-**5. Immersive Music Feature:** Elevate the workout experience with a seamlessly integrated music feature, allowing users to listen to their favorite tunes and enhance motivation during exercise.
+**4. Immersive Music Feature:** Elevate the workout experience with a seamlessly integrated music feature, allowing users to listen to their favorite tunes and enhance motivation during exercise.
 
-**6. Customizable Dark Mode:** Tailor the app's appearance to your preference with the option to switch between Dark Mode and the standard mode, ensuring a comfortable and visually pleasing workout experience.
+**5. Customizable Dark Mode:** Tailor the app's appearance to your preference with the option to switch between Dark Mode and the standard mode, ensuring a comfortable and visually pleasing workout experience.
 
 ## Sample Video: 
 **Video Link:** [TRINETRA-FLUTTER](https://youtu.be/cDras4r5D5U?feature=shared)<br>
@@ -22,9 +22,11 @@ _The application was refined extensively to improve accuracy and user experience
 
 
 ## Screenshots
-![](/assets/screenshots/1.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/2.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/3.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/4.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/5.jpeg?raw=true "Optional Title")
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](/assets/screenshots/6.jpeg?raw=true "Optional Title")  |  ![](/assets/screenshots/7.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/8.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/9.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/10.jpeg?raw=true "Optional Title")
+![](/assets/screenshots/1.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/2.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/3.jpeg?raw=true "Optional Title") | ![](/assets/screenshots/4.jpeg?raw=true "Optional Title")
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](/assets/screenshots/5.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/9.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/10.jpeg?raw=true "Optional Title")
+
+<!-- ![](/assets/screenshots/6.jpeg?raw=true "Optional Title")  |  ![](/assets/screenshots/7.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/8.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/9.jpeg?raw=true "Optional Title") |  ![](/assets/screenshots/10.jpeg?raw=true "Optional Title") -->
 
 ## Folder Structure
 ```
